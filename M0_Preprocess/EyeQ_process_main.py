@@ -60,7 +60,7 @@ def process(image_list, save_path):
 if __name__ == "__main__":
     if os.path.exists(BASE_PATH + "/.ipynb_checkpoints"):
         shutil.rmtree(BASE_PATH + "/.ipynb_checkpoints")
-    image_list = glob.glob(BASE_PATH + "/**/**/*")
+    image_list = glob.glob(BASE_PATH + "/**/*.*", recursive=True)
     save_path = '../Results/M0/images/'
     if not os.path.exists(save_path):
         os.makedirs(save_path)
