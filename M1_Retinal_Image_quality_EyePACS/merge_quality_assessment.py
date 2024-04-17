@@ -4,7 +4,7 @@ import shutil
 import os
 
 
-result_Eyepacs = './test_outside/results_ensemble.csv'
+result_Eyepacs = '../Results/M1/results_ensemble.csv'
 
 if not os.path.exists('../Results/M1/Good_quality/'):
     os.makedirs('../Results/M1/Good_quality/')

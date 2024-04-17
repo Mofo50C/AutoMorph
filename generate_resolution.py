@@ -1,11 +1,15 @@
 import pandas as pd
 import os
+import glob
 import shutil
+
+BASE_PATH = "./images"
 
 if os.path.exists('./images/.ipynb_checkpoints'):
     shutil.rmtree('./images/.ipynb_checkpoints')
 
-image_list = sorted(os.listdir('./images/'))
+# image_list = sorted(os.listdir('./images/'))
+image_list = [os.path.normpath(os.path.relpath(x, BASE_PATH)) for x in glob.iglob(BASE_PATH + "/**/**/*")]
 img_list = []
 # import image resolution here
 res_list = []
