@@ -77,7 +77,7 @@ def test_net(model_fl_1,
         with tqdm(total=n_test, desc=f'Epoch {epoch + 1}/{epochs}', unit='img') as pbar:
             for batch in val_loader:
                 imgs = batch['image']
-                filename = batch['img_file'][0]
+                filename = batch['img_file']
                 mask_pred_tensor_small_all = 0
                 imgs = imgs.to(device=device, dtype=torch.float32)
                 ##################sigmoid or softmax
@@ -144,9 +144,9 @@ def test_net(model_fl_1,
                     prediction_decode_list.extend(prediction_decode.cpu().detach().numpy())
                     filename_list.extend(filename)
                     pbar.update(imgs.shape[0])
-        
+    
     Data4stage2 = pd.DataFrame({'Name':filename_list, 'softmax_good':np.array(prediction_list_mean)[:,0],'softmax_usable':np.array(prediction_list_mean)[:,1],'softmax_bad':np.array(prediction_list_mean)[:,2], 'good_sd':np.array(prediction_list_std)[:,0],'usable_sd':np.array(prediction_list_std)[:,1],'bad_sd':np.array(prediction_list_std)[:,2], 'Prediction': prediction_decode_list})
-    Data4stage2.to_csv('./test_outside/results_ensemble.csv', index = None, encoding='utf8')
+
     if not os.path.exists('../Results/M1'):
         os.makedirs('../Results/M1')
     Data4stage2.to_csv('../Results/M1/results_ensemble.csv', index = None, encoding='utf8')
@@ -294,10 +294,3 @@ if __name__ == '__main__':
             sys.exit(0)
         except SystemExit:
             os._exit(0)
-
-
-
-
-
-
-
